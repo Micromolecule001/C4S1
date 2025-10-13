@@ -1,0 +1,34 @@
+body {
+  background: #111;
+  color: #eee;
+  font-family: monospace;
+  text-align: center;
+  padding: 2rem;
+}
+textarea {
+  width: 80%;
+  height: 100px;
+  background: #222;
+  color: #eee;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+}
+button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+pre {
+  text-align: left;
+  margin-top: 1.5rem;
+  background: #222;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
