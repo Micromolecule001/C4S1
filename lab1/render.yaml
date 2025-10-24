@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: lab1-server
+    env: python
+    plan: free
+    region: frankfurt
+    buildCommand: pip install -r lab1/requirements.txt
+    startCommand: python lab1/server.py
+    autoDeploy: true
+
