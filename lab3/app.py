@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import requests
+import logging
 
 app = Flask(__name__)
 
@@ -14,7 +15,12 @@ def ask():
     data = request.get_json()
     prompt = data.get("prompt", "")
     payload = {"model": "phi3", "prompt": prompt}
+
+    logging.info(f"Sending request to Ollama: {payload}")
+
     response = requests.post(OLLAMA_URL, json=payload, stream=True)
+    logging.info(f"Ollama status code: {response.status_code}")
+
 
     answer = ""
     for line in response.iter_lines():
@@ -22,6 +28,7 @@ def ask():
             part = line.decode("utf-8")
             if '"response":"' in part:
                 # вытаскиваем текст
+                logging.info(f"\n response: \n {response}")
                 text = part.split('"response":"')[-1].split('"')[0]
                 answer += text
     return jsonify({"answer": answer})
