@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
 import os, random, threading, time, requests
 from flask import Flask, request, jsonify
+import logging
+import http.client as http_client
+
+http_client.HTTPConnection.debuglevel = 1
 
 app = Flask(__name__)
 
 # Память для idempotent-ключей
 processed = {}  # Idempotency-Key -> результат
+logging.basicConfig()
+requests_log = logging.getLogger("urllib3")
+requests_log.propagate = True
 
 # ---------------------------
 #        ENDPOINT 1
@@ -23,7 +30,7 @@ def unstable():
 @app.route("/charge", methods=["POST"])
 def charge():
     key = request.headers.get("Idempotency-Key")
-    print(f'Key: {key}\n')
+    print(f'\nKey: {key}')
     data = request.get_json(silent=True) or {}
     amount = data.get("amount", 0)
 
