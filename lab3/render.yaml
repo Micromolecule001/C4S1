@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: lab3-flask
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: OLLAMA_URL
+        value: "https://abc123.ngrok-free.app/api/generate"
+
